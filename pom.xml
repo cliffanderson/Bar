@@ -6,9 +6,11 @@
 
     <groupId>net.cliffanderson</groupId>
     <artifactId>Bar</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
-        <dependencies>
+    <!-- mvn clean compile assembly:single -->
+
+    <dependencies>
             <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
             <dependency>
                 <groupId>mysql</groupId>
