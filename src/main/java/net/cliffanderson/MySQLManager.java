@@ -2,6 +2,7 @@ package net.cliffanderson;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,9 +18,10 @@ public class MySQLManager {
         MysqlDataSource dataSource;
 
         dataSource = new MysqlDataSource();
-        dataSource.setUser("root");
-        dataSource.setPassword("Puppet123!");
-        dataSource.setServerName("localhost");
+        dataSource.setUser("baruser");
+        String pass = getPassword();
+        dataSource.setPassword(pass);
+        dataSource.setServerName("cliffanderson.net");
         dataSource.setDatabaseName("bar");
 
         try {
@@ -28,7 +30,22 @@ public class MySQLManager {
             e.printStackTrace();
         }
 
+
         System.out.println("Creating new MySQL connection: " + connection);
+    }
+
+    private static String getPassword() {
+        JPasswordField passwordField = new JPasswordField();
+        int response = JOptionPane.showConfirmDialog(null, passwordField, "Enter the database password",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if(response == JOptionPane.OK_OPTION) {
+            return new String(passwordField.getPassword());
+        }
+
+        System.err.println("User did not enter password");
+        System.exit(0);
+        return "";
     }
 
     public static ResultSet executeQuery(String sql, Object...args) {
