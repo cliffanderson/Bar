@@ -7,9 +7,7 @@ import net.cliffanderson.obj.Person;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BarManager {
 
@@ -117,6 +115,10 @@ public class BarManager {
             System.err.println("Error loading aliases:");
             e.printStackTrace();
         }
+    }
+
+    public List<Alias> getAliases() {
+        return this.aliases;
     }
 
     public Drink getDrinkByAlias(String aliasName) {
