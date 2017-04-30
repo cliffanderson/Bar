@@ -12,7 +12,7 @@ public class PurchaseHandler extends CommandHandler {
 
     public void handle() {
         if(this.args.size() < 2) {
-            System.err.println("Too few arguments. Usage: purchase [name] [drink] <number>");
+            System.err.println("Too few arguments. Usage: purchase [name] [drink name | drink alias] <number>");
             return;
         }
 
@@ -26,14 +26,20 @@ public class PurchaseHandler extends CommandHandler {
             } catch (Exception e){}
         }
 
-        // Validate args
+        // Validate person
         Person person = BarManager.instance.getPerson(personName);
         if(person == null) {
             System.err.println("Error: Could not find person " + personName);
             return;
         }
 
+        // Validate drink
         Drink drink = BarManager.instance.getDrink(drinkName);
+        if(drink == null) {
+            // Try finding drink by alias
+            drink = BarManager.instance.getDrinkByAlias(drinkName);
+        }
+        // If it's still null, no drink was found
         if(drink == null) {
             System.err.println("Error: Could not find drink " + drinkName);
             return;
