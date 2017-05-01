@@ -152,4 +152,25 @@ public class BarManager {
 
     }
 
+    /**
+     * Register a credit to someone. May be in the form of cash or drink credit
+     * @param person Who the credit is for
+     * @param amount How much
+     * @param description What it is for
+     */
+    public void registerCredit(Person person, double amount, String description) {
+        if(person == null || amount <= 0 || description == null || description.length() == 0) {
+            System.err.println("Error: invalid args for registerCredit()");
+            return;
+        }
+
+        String sql = "insert into credit (personid, amount, description) VALUES (?, ?, ?);";
+
+        if(!MySQLManager.executeSQL(sql, person.getId(), amount, description)) {
+            System.err.println("Error: Could not register credit");
+        } else {
+            System.out.println("Success");
+        }
+    }
+
 }

@@ -29,6 +29,7 @@ public class CommandManager {
         this.handlers.put("tab", TabHandler.class);
         this.handlers.put("exit", ExitHandler.class);
         this.handlers.put("aliases", AliasesHandler.class);
+        this.handlers.put("credit", CreditHandler.class);
     }
 
     void processCommand(String cmdString) throws Exception {
