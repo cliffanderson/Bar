@@ -86,6 +86,14 @@ public class BarManager {
         return null;
     }
 
+    public Person getPerson(int id) {
+        for(Person p : this.people) {
+            if(p.getId() == id) return p;
+        }
+
+        return null;
+    }
+
     private void loadAliases() {
         this.aliases = new ArrayList<Alias>();
 

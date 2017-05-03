@@ -1,8 +1,11 @@
 package net.cliffanderson;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import org.apache.commons.io.FileUtils;
 
 import javax.swing.*;
+import java.io.File;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +38,13 @@ public class MySQLManager {
     }
 
     private static String getPassword() {
+        try {
+            File passwordFile = new File("/tmp/bar_password");
+            if(passwordFile.exists()) {
+                return FileUtils.readFileToString(passwordFile, Charset.defaultCharset()).replace("\n", "");
+            }
+        } catch (Exception e){} //If there is an exception, it's probably running on windows
+
         JPasswordField passwordField = new JPasswordField();
         int response = JOptionPane.showConfirmDialog(null, passwordField, "Enter the database password",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
