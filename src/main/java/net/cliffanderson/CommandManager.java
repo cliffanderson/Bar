@@ -26,6 +26,8 @@ public class CommandManager {
 
     void processCommand(String cmdString) throws Exception {
 
+        if(cmdString.length() == 0) return;
+
         String commandName = cmdString.split(" ")[0].toLowerCase();
 
         if(! this.handlers.containsKey(commandName)) {
