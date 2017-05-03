@@ -7,15 +7,13 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by cliff on 4/18/17.
- */
 public class TabHandler extends CommandHandler {
 
     public TabHandler(String line) {
         super(line);
     }
 
+    @Override
     public void handle() {
         Map<Integer, Double> tabs = new HashMap<Integer, Double>();
 

@@ -1,8 +1,5 @@
 package net.cliffanderson.obj;
 
-/**
- * Created by cliff on 4/16/17.
- */
 public class Drink {
 
     private int id;

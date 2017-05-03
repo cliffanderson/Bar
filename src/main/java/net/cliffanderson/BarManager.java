@@ -21,7 +21,6 @@ public class BarManager {
         this.loadPeople();
         this.loadAliases();
 
-
         instance = this;
     }
 
@@ -157,7 +156,6 @@ public class BarManager {
         } else {
             System.out.println("Success");
         }
-
     }
 
     /**
@@ -180,5 +178,4 @@ public class BarManager {
             System.out.println("Success");
         }
     }
-
 }

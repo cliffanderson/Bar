@@ -49,6 +49,5 @@ public class CreditHandler extends CommandHandler {
         String description = builder.toString();
 
         BarManager.instance.registerCredit(person, amount, description);
-
     }
 }

@@ -1,17 +1,12 @@
 package net.cliffanderson.handlers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by cliff on 3/24/17.
- */
 public abstract class CommandHandler {
 
     protected String command;
     protected List<String> args;
-
 
     public CommandHandler(String line) {
         String[] split = line.split(" ");
@@ -24,9 +19,6 @@ public abstract class CommandHandler {
                 this.args.add(split[i + 1]);
             }
         }
-
-        //System.out.printf("[Debug][%s] Command: %s%n", this.getClass().getName(), this.command);
-        //System.out.printf("[Debug][%s] Args: %s%n", this.getClass().getName(), args.toString());
     }
 
     public abstract void handle();

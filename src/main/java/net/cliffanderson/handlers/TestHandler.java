@@ -1,20 +1,17 @@
 package net.cliffanderson.handlers;
 
 import net.cliffanderson.MySQLManager;
-import net.cliffanderson.handlers.CommandHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by cliff on 3/24/17.
- */
 public class TestHandler extends CommandHandler {
 
     public TestHandler(String line) {
         super(line);
     }
 
+    @Override
     public void handle() {
         System.out.println("Handling the test command");
 

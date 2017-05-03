@@ -5,15 +5,13 @@ import net.cliffanderson.MySQLManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by cliff on 3/27/17.
- */
 public class QueryHandler extends CommandHandler {
 
     public QueryHandler(String line) {
         super(line);
     }
 
+    @Override
     public void handle() {
         StringBuilder builder = new StringBuilder();
 

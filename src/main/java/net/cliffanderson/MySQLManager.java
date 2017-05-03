@@ -11,9 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by cliff on 3/25/17.
- */
 public class MySQLManager {
     private static Connection connection;
 
@@ -32,7 +29,6 @@ public class MySQLManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         System.out.println("Creating new MySQL connection: " + connection);
     }

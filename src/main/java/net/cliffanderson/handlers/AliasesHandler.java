@@ -3,9 +3,6 @@ package net.cliffanderson.handlers;
 import net.cliffanderson.BarManager;
 import net.cliffanderson.obj.Alias;
 
-/**
- * Created by cliff on 4/30/17.
- */
 public class AliasesHandler extends CommandHandler {
 
     public AliasesHandler(String line) {

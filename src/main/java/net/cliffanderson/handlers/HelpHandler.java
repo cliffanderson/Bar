@@ -2,9 +2,6 @@ package net.cliffanderson.handlers;
 
 import net.cliffanderson.CommandManager;
 
-/**
- * Created by cliff on 4/13/17.
- */
 public class HelpHandler extends CommandHandler {
 
     private CommandManager manager;
@@ -15,6 +12,7 @@ public class HelpHandler extends CommandHandler {
         this.manager = manager;
     }
 
+    @Override
     public void handle() {
         System.out.println("Commands: ");
         for(String s : this.manager.getCommands()) {

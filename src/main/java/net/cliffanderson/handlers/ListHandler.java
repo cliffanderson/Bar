@@ -10,6 +10,7 @@ public class ListHandler extends CommandHandler {
         super(s);
     }
 
+    @Override
     public void handle() {
         System.out.println("People:");
         for(Person p : BarManager.instance.getPeople()) {

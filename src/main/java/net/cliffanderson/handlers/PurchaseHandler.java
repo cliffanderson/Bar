@@ -10,6 +10,7 @@ public class PurchaseHandler extends CommandHandler {
         super(line);
     }
 
+    @Override
     public void handle() {
         if(this.args.size() < 2) {
             System.err.println("Too few arguments. Usage: purchase [name] [drink name | drink alias] <number>");
