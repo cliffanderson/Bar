@@ -2,5 +2,5 @@
 *.lst
 *.class
 .idea/
-Command.iml
+*.iml
 *.jar
