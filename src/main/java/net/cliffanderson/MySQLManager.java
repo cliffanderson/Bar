@@ -10,19 +10,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class MySQLManager {
     private static Connection connection;
+    private static Properties properties;
 
     private static void setupConnection() {
+        loadProperties();
+
         MysqlDataSource dataSource;
 
         dataSource = new MysqlDataSource();
-        dataSource.setUser("baruser");
+        dataSource.setUser("user");
         String pass = getPassword();
         dataSource.setPassword(pass);
-        dataSource.setServerName("cliffanderson.net");
-        dataSource.setDatabaseName("bar");
+        dataSource.setServerName("servername");
+        dataSource.setDatabaseName("dbname");
 
         try {
             connection = dataSource.getConnection();
@@ -31,6 +35,24 @@ public class MySQLManager {
         }
 
         System.out.println("Creating new MySQL connection: " + connection);
+    }
+
+    private static void loadProperties() {
+        File jarFolder;
+
+        try {
+            jarFolder = new File(MySQLManager.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile();
+
+            File propertiesFile = new File(jarFolder, "bar.properties");
+            if(!propertiesFile.exists()) {
+                propertiesFile.createNewFile();
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error getting path to properties file");
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     private static String getPassword() {
