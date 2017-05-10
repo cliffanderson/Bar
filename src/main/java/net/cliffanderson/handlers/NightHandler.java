@@ -47,7 +47,7 @@ public class NightHandler extends CommandHandler {
 
                 totalCost += cost;
 
-                System.out.printf("Name: %s   Drink: %s%sCost: %s%n", person.getName(), drink.getName(), String.format("%" + (20 - drink.getName().length()) + "s", " "),  new DecimalFormat("##0.00").format(cost));
+                System.out.printf("Name: %s%sDrink: %s%sCost: %s%n", person.getName(), String.format("%" + (15 - person.getName().length()) + "s", " "), drink.getName(), String.format("%" + (15 - drink.getName().length()) + "s", " "),  new DecimalFormat("##0.00").format(cost));
             }
         } catch (SQLException e) {
             e.printStackTrace();
