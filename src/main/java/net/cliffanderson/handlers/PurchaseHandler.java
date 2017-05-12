@@ -53,5 +53,8 @@ public class PurchaseHandler extends CommandHandler {
 
         // Args are valid, make the purchase
         BarManager.instance.makePurchase(person, drink, amount);
+
+        // Print the persons tab for the night
+        BarManager.instance.printItemizedTabForPerson(person);
     }
 }
