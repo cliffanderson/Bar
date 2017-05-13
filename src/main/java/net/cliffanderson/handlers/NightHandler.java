@@ -33,7 +33,7 @@ public class NightHandler extends CommandHandler {
                 "inner join people p on p.id = pur.personid " +
                 "inner join drinks d on d.id = pur.drinkid " +
 
-                "where pur.time > DATE_SUB(NOW(), INTERVAL 96 HOUR) and " +
+                "where pur.time > DATE_SUB(NOW(), INTERVAL 24 HOUR) and " +
                 "p.name like ?";
 
         ResultSet results = MySQLManager.executeQuery(sql, name);
