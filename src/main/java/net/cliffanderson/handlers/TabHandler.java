@@ -25,7 +25,7 @@ public class TabHandler extends CommandHandler {
 
         try {
             // Put sum of purchases into hashmap
-            ResultSet purchaseResults = MySQLManager.executeQuery(tabSQL);
+            ResultSet purchaseResults = BarManager.instance.getMysql().executeQuery(tabSQL);
 
             while(purchaseResults.next()) {
                 int personid = purchaseResults.getInt(1);
@@ -36,7 +36,7 @@ public class TabHandler extends CommandHandler {
 
 
             // Add the credits
-            ResultSet creditResults = MySQLManager.executeQuery(creditSQL);
+            ResultSet creditResults = BarManager.instance.getMysql().executeQuery(creditSQL);
 
             while(creditResults.next()) {
                 int personid = creditResults.getInt(1);

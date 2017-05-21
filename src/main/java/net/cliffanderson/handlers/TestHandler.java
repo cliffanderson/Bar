@@ -1,5 +1,6 @@
 package net.cliffanderson.handlers;
 
+import net.cliffanderson.BarManager;
 import net.cliffanderson.MySQLManager;
 
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class TestHandler extends CommandHandler {
     public void handle() {
         System.out.println("Handling the test command");
 
-        ResultSet tables = MySQLManager.executeQuery("show tables;");
+        ResultSet tables = BarManager.instance.getMysql().executeQuery("show tables;");
 
         try {
             while (tables.next()) {

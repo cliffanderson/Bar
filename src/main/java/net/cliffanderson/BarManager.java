@@ -4,6 +4,8 @@ import net.cliffanderson.obj.Alias;
 import net.cliffanderson.obj.Drink;
 import net.cliffanderson.obj.Person;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -13,11 +15,27 @@ import java.util.List;
 public class BarManager {
 
     public static BarManager instance;
+    private MySQLManager mysql;
+
     private List<Drink> drinks;
     private List<Person> people;
     private List<Alias> aliases;
 
     BarManager() {
+        File jarFolder;
+
+        try {
+            jarFolder = new File(MySQLManager.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile();
+        } catch (URISyntaxException e) {
+            System.err.println("Exception getting folder containing jar");
+            return;
+        }
+
+        File propertiesFile = new File(jarFolder, "bar.properties");
+        CustomProperties customProperties = new CustomProperties(propertiesFile);
+
+        mysql = new MySQLManager(customProperties);
+
         this.loadDrinks();
         this.loadPeople();
         this.loadAliases();
@@ -25,10 +43,14 @@ public class BarManager {
         instance = this;
     }
 
+    public MySQLManager getMysql() {
+        return this.mysql;
+    }
+
     private void loadDrinks() {
         this.drinks = new ArrayList<Drink>();
 
-        ResultSet results = MySQLManager.executeQuery("select id, name, price from drinks;");
+        ResultSet results = this.mysql.executeQuery("select id, name, price from drinks;");
 
         if (results == null) {
             System.err.println("Error: Could not load drinks");
@@ -63,7 +85,7 @@ public class BarManager {
     private void loadPeople() {
         this.people = new ArrayList<Person>();
 
-        ResultSet results = MySQLManager.executeQuery("select id, name from people;");
+        ResultSet results = this.mysql.executeQuery("select id, name from people;");
 
         try {
             while (results.next()) {
@@ -97,7 +119,7 @@ public class BarManager {
     private void loadAliases() {
         this.aliases = new ArrayList<Alias>();
 
-        ResultSet results = MySQLManager.executeQuery("select a.name, a.drinkid from aliases a inner join drinks d on d.id = a.drinkid");
+        ResultSet results = this.mysql.executeQuery("select a.name, a.drinkid from aliases a inner join drinks d on d.id = a.drinkid");
 
         try {
             while(results.next()) {
@@ -159,7 +181,7 @@ public class BarManager {
                 "where pur.time > DATE_SUB(NOW(), INTERVAL 96 HOUR) and " +
                 "p.name like ?";
 
-        ResultSet results = MySQLManager.executeQuery(sql, searchString);
+        ResultSet results = this.mysql.executeQuery(sql, searchString);
         double totalCost = 0.0;
         int totalDrinks = 0;
 
@@ -208,7 +230,7 @@ public class BarManager {
 
         String sql = "insert into purchases (personid, drinkid, quantity) VALUES (?, ?, ?);";
 
-        if(!MySQLManager.executeSQL(sql, person.getId(), drink.getId(), amount)) {
+        if(! this.mysql.executeSQL(sql, person.getId(), drink.getId(), amount)) {
             System.err.println("Error, could not register purchase!");
         } else {
             System.out.println("Success");
@@ -229,7 +251,7 @@ public class BarManager {
 
         String sql = "insert into credit (personid, amount, description) VALUES (?, ?, ?);";
 
-        if(!MySQLManager.executeSQL(sql, person.getId(), amount, description)) {
+        if(! this.mysql.executeSQL(sql, person.getId(), amount, description)) {
             System.err.println("Error: Could not register credit");
         } else {
             System.out.println("Success");

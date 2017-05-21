@@ -1,5 +1,6 @@
 package net.cliffanderson.handlers;
 
+import net.cliffanderson.BarManager;
 import net.cliffanderson.MySQLManager;
 
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class QueryHandler extends CommandHandler {
         }
 
 
-        ResultSet results = MySQLManager.executeQuery(builder.toString().trim());
+        ResultSet results = BarManager.instance.getMysql().executeQuery(builder.toString().trim());
 
         if(results == null) {
             // There was some error while executing the SQL
