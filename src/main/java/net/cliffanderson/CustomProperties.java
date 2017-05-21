@@ -72,7 +72,7 @@ public class CustomProperties {
         }
 
         try {
-            this.properties.store(out, "CustomProperties at " + new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z").format(new Date()));
+            this.properties.store(out, "CustomProperties");
         } catch (IOException e) {
             System.err.println("Error: could not store properties to file " + this.propertiesFile.getAbsolutePath());
         }
