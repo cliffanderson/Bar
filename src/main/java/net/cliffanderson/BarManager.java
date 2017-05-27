@@ -174,7 +174,7 @@ public class BarManager {
     public void printItemizedTab(String searchString) {
         System.out.println("\n\nRecent drinks for " + (searchString.equals("%") ? "everyone" : searchString.replace("%", "")) + ":");
 
-        String sql = "select p.name, d.name, pur.quantity, d.price from purchases pur " +
+        String sql = "select p.name, d.name, pur.quantity, d.price, d.isliquor from purchases pur " +
                 "inner join people p on p.id = pur.personid " +
                 "inner join drinks d on d.id = pur.drinkid " +
 
@@ -191,9 +191,13 @@ public class BarManager {
                 Drink drink = BarManager.instance.getDrink(results.getString(2));
                 int quantity = results.getInt(3);
                 double cost = quantity * results.getDouble(4);
+                boolean isLiquor = results.getInt(5) == 1;
 
                 totalCost += cost;
-                totalDrinks += quantity;
+
+                if(isLiquor) {
+                    totalDrinks += quantity;
+                }
 
                 // The String.format calls are getting a number of spaces based on the length of the previous argument
 
@@ -212,7 +216,7 @@ public class BarManager {
 
         //%10.2f: Max of 10 numbers to the left of the decimal and max of 2 numbers to the right
         System.out.printf("%nTotal cost: %10.2f%n", totalCost);
-        System.out.printf("Total drinks: %5d%n", totalDrinks);
+        System.out.printf("Total (alcoholic) drinks: %5d%n", totalDrinks);
     }
 
     /**
